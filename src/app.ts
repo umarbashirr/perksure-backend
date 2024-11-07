@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 
 import authRoutes from "./routes/auth.routes";
+import workspaceRoutes from "./routes/workspace.routes";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/workspaces", workspaceRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
