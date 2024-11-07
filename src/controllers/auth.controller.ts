@@ -82,4 +82,8 @@ export const authController = {
       .status(200)
       .json({ message: "Logged in successfully!", data: payload });
   }),
+  logout: asyncHandler(async (req: any, res: any) => {
+    res.clearCookie("appToken");
+    return res.status(200).json({ message: "Logged out successfully!" });
+  }),
 };
