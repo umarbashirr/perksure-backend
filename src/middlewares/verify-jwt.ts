@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
 export const verifyJWT = asyncHandler(async (req: any, res: any, next: any) => {
-  const token = req.cookies.token;
+  const token = req.cookies.appToken;
 
   if (!token) {
     return res.status(401).json({ message: "ACCESS_DENIED" });
@@ -12,9 +12,9 @@ export const verifyJWT = asyncHandler(async (req: any, res: any, next: any) => {
 
   if (!decodedToken) {
     return res.status(401).json("UN_AUTHORIZED");
+  } else {
+    req.user = decodedToken;
+
+    next();
   }
-
-  req.user = decodedToken;
-
-  next();
 });
